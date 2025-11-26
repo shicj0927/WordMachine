@@ -1,0 +1,46 @@
+Date : 2025-11-26 20:44:37
+Directory : /home/shicj/wm
+Total : 12 files,  2727 codes, 120 comments, 582 blanks, all 3429 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| Markdown   |          3 |        898 |          0 |        246 |      1,144 |
+| JavaScript |          3 |        746 |         44 |        117 |        907 |
+| Python     |          1 |        439 |         60 |        102 |        601 |
+| PostCSS    |          1 |        322 |          8 |         66 |        396 |
+| HTML       |          3 |        312 |          8 |         50 |        370 |
+| Log        |          1 |         10 |          0 |          1 |         11 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------+------------+------------+------------+------------+------------+
+| path                                       | files      | code       | comment    | blank      | total      |
++--------------------------------------------+------------+------------+------------+------------+------------+
+| .                                          |         12 |      2,727 |        120 |        582 |      3,429 |
+| . (Files)                                  |          5 |      1,347 |         60 |        349 |      1,756 |
+| static                                     |          4 |      1,068 |         52 |        183 |      1,303 |
+| static/css                                 |          1 |        322 |          8 |         66 |        396 |
+| static/js                                  |          3 |        746 |         44 |        117 |        907 |
+| templates                                  |          3 |        312 |          8 |         50 |        370 |
++--------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                   | language   | code       | comment    | blank      | total      |
++--------------------------------------------+------------+------------+------------+------------+------------+
+| /home/shicj/wm/GAME_IMPLEMENTATION.md      | Markdown   |        417 |          0 |        115 |        532 |
+| /home/shicj/wm/GAME_QUICKSTART.md          | Markdown   |        194 |          0 |         46 |        240 |
+| /home/shicj/wm/GAME_REPORT.md              | Markdown   |        287 |          0 |         85 |        372 |
+| /home/shicj/wm/app.py                      | Python     |        439 |         60 |        102 |        601 |
+| /home/shicj/wm/server.log                  | Log        |         10 |          0 |          1 |         11 |
+| /home/shicj/wm/static/css/game.css         | PostCSS    |        322 |          8 |         66 |        396 |
+| /home/shicj/wm/static/js/game-detail.js    | JavaScript |        141 |          8 |         24 |        173 |
+| /home/shicj/wm/static/js/game-playing.js   | JavaScript |        270 |         23 |         46 |        339 |
+| /home/shicj/wm/static/js/game.js           | JavaScript |        335 |         13 |         47 |        395 |
+| /home/shicj/wm/templates/game_detail.html  | HTML       |         62 |          3 |          7 |         72 |
+| /home/shicj/wm/templates/game_playing.html | HTML       |        242 |          3 |         39 |        284 |
+| /home/shicj/wm/templates/home.html         | HTML       |          8 |          2 |          4 |         14 |
+| Total                                      |            |      2,727 |        120 |        582 |      3,429 |
++--------------------------------------------+------------+------------+------------+------------+------------+

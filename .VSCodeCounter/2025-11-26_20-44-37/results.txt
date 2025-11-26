@@ -1,0 +1,80 @@
+Date : 2025-11-26 20:44:37
+Directory : /home/shicj/wm
+Total : 45 files,  7707 codes, 430 comments, 1565 blanks, all 9702 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         11 |      2,362 |        211 |        397 |      2,970 |
+| Markdown   |         11 |      1,669 |          0 |        467 |      2,136 |
+| PostCSS    |          9 |      1,454 |         32 |        307 |      1,793 |
+| Python     |          1 |      1,169 |        138 |        275 |      1,582 |
+| HTML       |         11 |      1,036 |         41 |        113 |      1,190 |
+| Log        |          1 |         10 |          0 |          1 |         11 |
+| MS SQL     |          1 |          7 |          8 |          5 |         20 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------+------------+------------+------------+------------+------------+
+| path                                       | files      | code       | comment    | blank      | total      |
++--------------------------------------------+------------+------------+------------+------------+------------+
+| .                                          |         45 |      7,707 |        430 |      1,565 |      9,702 |
+| . (Files)                                  |         14 |      2,855 |        146 |        748 |      3,749 |
+| static                                     |         20 |      3,816 |        243 |        704 |      4,763 |
+| static/css                                 |          9 |      1,454 |         32 |        307 |      1,793 |
+| static/js                                  |         11 |      2,362 |        211 |        397 |      2,970 |
+| templates                                  |         11 |      1,036 |         41 |        113 |      1,190 |
++--------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                   | language   | code       | comment    | blank      | total      |
++--------------------------------------------+------------+------------+------------+------------+------------+
+| /home/shicj/wm/ADMIN_GUIDE.md              | Markdown   |        111 |          0 |         33 |        144 |
+| /home/shicj/wm/ADMIN_IMPLEMENTATION.md     | Markdown   |        108 |          0 |         23 |        131 |
+| /home/shicj/wm/ADMIN_SUMMARY.md            | Markdown   |        208 |          0 |         58 |        266 |
+| /home/shicj/wm/DICT_IMPLEMENTATION.md      | Markdown   |        146 |          0 |         44 |        190 |
+| /home/shicj/wm/GAME_IMPLEMENTATION.md      | Markdown   |        417 |          0 |        115 |        532 |
+| /home/shicj/wm/GAME_QUICKSTART.md          | Markdown   |        194 |          0 |         46 |        240 |
+| /home/shicj/wm/GAME_REPORT.md              | Markdown   |        287 |          0 |         85 |        372 |
+| /home/shicj/wm/QUICK_REFERENCE.md          | Markdown   |        128 |          0 |         42 |        170 |
+| /home/shicj/wm/README.md                   | Markdown   |          4 |          0 |          3 |          7 |
+| /home/shicj/wm/app.py                      | Python     |      1,169 |        138 |        275 |      1,582 |
+| /home/shicj/wm/gen.md                      | Markdown   |          6 |          0 |          5 |         11 |
+| /home/shicj/wm/server.log                  | Log        |         10 |          0 |          1 |         11 |
+| /home/shicj/wm/setup.sql                   | MS SQL     |          7 |          8 |          5 |         20 |
+| /home/shicj/wm/start.md                    | Markdown   |         60 |          0 |         13 |         73 |
+| /home/shicj/wm/static/css/admin.css        | PostCSS    |        265 |          4 |         55 |        324 |
+| /home/shicj/wm/static/css/basic.css        | PostCSS    |        253 |          9 |         50 |        312 |
+| /home/shicj/wm/static/css/changepw.css     | PostCSS    |         32 |          0 |          8 |         40 |
+| /home/shicj/wm/static/css/color.css        | PostCSS    |         17 |          0 |          1 |         18 |
+| /home/shicj/wm/static/css/dict.css         | PostCSS    |        428 |         11 |         95 |        534 |
+| /home/shicj/wm/static/css/game.css         | PostCSS    |        322 |          8 |         66 |        396 |
+| /home/shicj/wm/static/css/home.css         | PostCSS    |         65 |          0 |         14 |         79 |
+| /home/shicj/wm/static/css/login.css        | PostCSS    |         36 |          0 |          9 |         45 |
+| /home/shicj/wm/static/css/register.css     | PostCSS    |         36 |          0 |          9 |         45 |
+| /home/shicj/wm/static/js/admin.js          | JavaScript |        627 |         64 |        105 |        796 |
+| /home/shicj/wm/static/js/auth.js           | JavaScript |        184 |         15 |         32 |        231 |
+| /home/shicj/wm/static/js/basic.js          | JavaScript |        241 |         42 |         39 |        322 |
+| /home/shicj/wm/static/js/changepw.js       | JavaScript |         93 |          9 |         15 |        117 |
+| /home/shicj/wm/static/js/dict.js           | JavaScript |        358 |         25 |         60 |        443 |
+| /home/shicj/wm/static/js/game-detail.js    | JavaScript |        141 |          8 |         24 |        173 |
+| /home/shicj/wm/static/js/game-playing.js   | JavaScript |        270 |         23 |         46 |        339 |
+| /home/shicj/wm/static/js/game.js           | JavaScript |        335 |         13 |         47 |        395 |
+| /home/shicj/wm/static/js/home.js           | JavaScript |         25 |          4 |          6 |         35 |
+| /home/shicj/wm/static/js/login.js          | JavaScript |         39 |          4 |         10 |         53 |
+| /home/shicj/wm/static/js/register.js       | JavaScript |         49 |          4 |         13 |         66 |
+| /home/shicj/wm/templates/_navbar.html      | HTML       |         18 |          0 |          1 |         19 |
+| /home/shicj/wm/templates/admin.html        | HTML       |        259 |         10 |         16 |        285 |
+| /home/shicj/wm/templates/changepw.html     | HTML       |         69 |          7 |          9 |         85 |
+| /home/shicj/wm/templates/dict_admin.html   | HTML       |        127 |          7 |         12 |        146 |
+| /home/shicj/wm/templates/game_detail.html  | HTML       |         62 |          3 |          7 |         72 |
+| /home/shicj/wm/templates/game_playing.html | HTML       |        242 |          3 |         39 |        284 |
+| /home/shicj/wm/templates/home.html         | HTML       |         61 |          2 |          7 |         70 |
+| /home/shicj/wm/templates/leaderboard.html  | HTML       |         49 |          0 |          3 |         52 |
+| /home/shicj/wm/templates/login.html        | HTML       |         51 |          5 |          7 |         63 |
+| /home/shicj/wm/templates/register.html     | HTML       |         73 |          4 |          9 |         86 |
+| /home/shicj/wm/templates/user.html         | HTML       |         25 |          0 |          3 |         28 |
+| Total                                      |            |      7,707 |        430 |      1,565 |      9,702 |
++--------------------------------------------+------------+------------+------------+------------+------------+

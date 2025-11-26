@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对局进行中 - WordMachine</title>
+    <link rel="stylesheet" href="/static/css/color.css">
+    <link rel="stylesheet" href="/static/css/basic.css">
+    <link rel="stylesheet" href="/static/css/admin.css">
+    <link rel="stylesheet" href="/static/css/game.css">
+    <style>
+        .game-playing-container {
+            background-color: var(--background-color);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .game-playing-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .game-playing-main {
+            background-color: var(--surface-color);
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-light);
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .game-question {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .game-question h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin: 0 0 1rem 0;
+        }
+
+        .game-question-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .question-progress {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .answer-form {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .answer-form input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: inherit;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+        }
+
+        .answer-form input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .answer-form button {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .answer-form button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .answer-form button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .game-results {
+            margin-bottom: 2rem;
+        }
+
+        .result-item {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .result-correct {
+            background-color: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--success-color);
+            color: var(--success-color);
+        }
+
+        .result-wrong {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid var(--danger-color);
+            color: var(--danger-color);
+        }
+
+        .result-word {
+            font-weight: 500;
+        }
+
+        .game-sidebar {
+            background-color: var(--surface-color);
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-light);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            height: fit-content;
+        }
+
+        .sidebar-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .participants-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.85rem;
+        }
+
+        .participants-list li {
+            padding: 0.5rem;
+            background-color: var(--background-color);
+            border-radius: 0.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .participants-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .score-display {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem;
+            background-color: var(--background-color);
+            border-radius: 0.25rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .score-label {
+            color: var(--text-secondary);
+        }
+
+        .score-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .end-game-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--danger-color);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .end-game-btn:hover {
+            background-color: #dc2626;
+        }
+
+        @media (max-width: 1024px) {
+            .game-playing-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% include '_navbar.html' %}
+    
+    <div class="game-playing-container">
+        <div class="game-playing-layout">
+            <!-- Main Playing Area -->
+            <div class="game-playing-main">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <a href="/" class="nav-link">← 返回对局大厅</a>
+                </div>
+
+                <div class="game-question">
+                    <div class="question-progress" id="progressText">加载中...</div>
+                    <h2 id="wordDisplay">-</h2>
+                    <div class="game-question-subtitle" id="wordChinese">-</div>
+                    <div class="game-question-subtitle" id="turnInfo" style="margin-top:0.5rem; font-weight:600; color:var(--text-primary);"></div>
+                </div>
+
+                <form id="answerForm" class="answer-form" onsubmit="submitAnswer(event)">
+                    <input 
+                        type="text" 
+                        id="answerInput" 
+                        placeholder="输入英文翻译..." 
+                        autocomplete="off"
+                        required
+                    >
+                    <button type="submit" id="submitBtn">提交</button>
+                </form>
+
+                <div class="game-results" id="resultsContainer">
+                    <!-- Recent results will be shown here -->
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="game-sidebar">
+                <div class="sidebar-section">
+                    <div class="sidebar-title">📊 我的成绩</div>
+                    <div class="score-display">
+                        <span class="score-label">正确：</span>
+                        <span class="score-value" id="myCorrect">0</span>
+                    </div>
+                    <div class="score-display">
+                        <span class="score-label">错误：</span>
+                        <span class="score-value" id="myWrong">0</span>
+                    </div>
+                    <div class="score-display">
+                        <span class="score-label">Perf：</span>
+                        <span class="score-value" id="myPerf">0</span>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-title">👥 参赛者</div>
+                    <ul class="participants-list" id="participantsList">
+                        <li>加载中...</li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <button class="end-game-btn" id="endGameBtn" onclick="endGame()">结束对局</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/static/js/basic.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/game-playing.js"></script>
+</body>
+</html>

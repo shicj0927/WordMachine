@@ -63,11 +63,12 @@ create table word(
 
 create table game(
     id int primary key auto_increment,
+    ownerid int,
     dictid int,
     users text,
     wordlist text,
     result text,
     perf int,
-    running boolean
+    status int
 );
 ```

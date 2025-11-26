@@ -1,0 +1,69 @@
+Date : 2025-11-26 19:33:00
+Directory : /home/shicj/wm
+Total : 35 files,  4980 codes, 310 comments, 983 blanks, all 6273 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |          8 |      1,616 |        167 |        280 |      2,063 |
+| PostCSS    |          8 |      1,132 |         24 |        241 |      1,397 |
+| Markdown   |          8 |        771 |          0 |        221 |        992 |
+| Python     |          1 |        730 |         78 |        173 |        981 |
+| HTML       |          9 |        724 |         33 |         63 |        820 |
+| MS SQL     |          1 |          7 |          8 |          5 |         20 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------+------------+------------+------------+------------+------------+
+| path                                      | files      | code       | comment    | blank      | total      |
++-------------------------------------------+------------+------------+------------+------------+------------+
+| .                                         |         35 |      4,980 |        310 |        983 |      6,273 |
+| . (Files)                                 |         10 |      1,508 |         86 |        399 |      1,993 |
+| static                                    |         16 |      2,748 |        191 |        521 |      3,460 |
+| static/css                                |          8 |      1,132 |         24 |        241 |      1,397 |
+| static/js                                 |          8 |      1,616 |        167 |        280 |      2,063 |
+| templates                                 |          9 |        724 |         33 |         63 |        820 |
++-------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                  | language   | code       | comment    | blank      | total      |
++-------------------------------------------+------------+------------+------------+------------+------------+
+| /home/shicj/wm/ADMIN_GUIDE.md             | Markdown   |        111 |          0 |         33 |        144 |
+| /home/shicj/wm/ADMIN_IMPLEMENTATION.md    | Markdown   |        108 |          0 |         23 |        131 |
+| /home/shicj/wm/ADMIN_SUMMARY.md           | Markdown   |        208 |          0 |         58 |        266 |
+| /home/shicj/wm/DICT_IMPLEMENTATION.md     | Markdown   |        146 |          0 |         44 |        190 |
+| /home/shicj/wm/QUICK_REFERENCE.md         | Markdown   |        128 |          0 |         42 |        170 |
+| /home/shicj/wm/README.md                  | Markdown   |          4 |          0 |          3 |          7 |
+| /home/shicj/wm/app.py                     | Python     |        730 |         78 |        173 |        981 |
+| /home/shicj/wm/gen.md                     | Markdown   |          6 |          0 |          5 |         11 |
+| /home/shicj/wm/setup.sql                  | MS SQL     |          7 |          8 |          5 |         20 |
+| /home/shicj/wm/start.md                   | Markdown   |         60 |          0 |         13 |         73 |
+| /home/shicj/wm/static/css/admin.css       | PostCSS    |        265 |          4 |         55 |        324 |
+| /home/shicj/wm/static/css/basic.css       | PostCSS    |        253 |          9 |         50 |        312 |
+| /home/shicj/wm/static/css/changepw.css    | PostCSS    |         32 |          0 |          8 |         40 |
+| /home/shicj/wm/static/css/color.css       | PostCSS    |         17 |          0 |          1 |         18 |
+| /home/shicj/wm/static/css/dict.css        | PostCSS    |        428 |         11 |         95 |        534 |
+| /home/shicj/wm/static/css/home.css        | PostCSS    |         65 |          0 |         14 |         79 |
+| /home/shicj/wm/static/css/login.css       | PostCSS    |         36 |          0 |          9 |         45 |
+| /home/shicj/wm/static/css/register.css    | PostCSS    |         36 |          0 |          9 |         45 |
+| /home/shicj/wm/static/js/admin.js         | JavaScript |        627 |         64 |        105 |        796 |
+| /home/shicj/wm/static/js/auth.js          | JavaScript |        184 |         15 |         32 |        231 |
+| /home/shicj/wm/static/js/basic.js         | JavaScript |        241 |         42 |         39 |        322 |
+| /home/shicj/wm/static/js/changepw.js      | JavaScript |         93 |          9 |         15 |        117 |
+| /home/shicj/wm/static/js/dict.js          | JavaScript |        358 |         25 |         60 |        443 |
+| /home/shicj/wm/static/js/home.js          | JavaScript |         25 |          4 |          6 |         35 |
+| /home/shicj/wm/static/js/login.js         | JavaScript |         39 |          4 |         10 |         53 |
+| /home/shicj/wm/static/js/register.js      | JavaScript |         49 |          4 |         13 |         66 |
+| /home/shicj/wm/templates/_navbar.html     | HTML       |         18 |          0 |          1 |         19 |
+| /home/shicj/wm/templates/admin.html       | HTML       |        259 |         10 |         16 |        285 |
+| /home/shicj/wm/templates/changepw.html    | HTML       |         69 |          7 |          9 |         85 |
+| /home/shicj/wm/templates/dict_admin.html  | HTML       |        127 |          7 |         12 |        146 |
+| /home/shicj/wm/templates/home.html        | HTML       |         53 |          0 |          3 |         56 |
+| /home/shicj/wm/templates/leaderboard.html | HTML       |         49 |          0 |          3 |         52 |
+| /home/shicj/wm/templates/login.html       | HTML       |         51 |          5 |          7 |         63 |
+| /home/shicj/wm/templates/register.html    | HTML       |         73 |          4 |          9 |         86 |
+| /home/shicj/wm/templates/user.html        | HTML       |         25 |          0 |          3 |         28 |
+| Total                                     |            |      4,980 |        310 |        983 |      6,273 |
++-------------------------------------------+------------+------------+------------+------------+------------+

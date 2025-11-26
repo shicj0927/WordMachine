@@ -1,0 +1,395 @@
+@import 'color.css';
+
+/* Game Container */
+.game-container {
+    background-color: var(--background-color);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+
+.game-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Notifications Section (Left) */
+.notifications-section {
+    background-color: var(--surface-color);
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-light);
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.notifications-section h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+.notification-item {
+    background-color: var(--background-color);
+    border-left: 4px solid var(--primary-color);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+}
+
+.notification-item:last-child {
+    margin-bottom: 0;
+}
+
+.notification-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.notification-content {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.notification-meta {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+/* Games Section (Right) */
+.games-section {
+    background-color: var(--surface-color);
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-light);
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.games-section h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+.games-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.games-tab {
+    padding: 0.75rem 1rem;
+    border: none;
+    background: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+}
+
+.games-tab:hover {
+    color: var(--primary-color);
+}
+
+.games-tab.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+/* Game Card */
+.game-card {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.2s;
+}
+
+.game-card:last-child {
+    margin-bottom: 0;
+}
+
+.game-card:hover {
+    box-shadow: var(--shadow-medium);
+    border-color: var(--primary-color);
+}
+
+.game-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.game-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.game-status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-pending {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--primary-color);
+}
+
+.status-running {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--primary-color);
+}
+
+.status-finished {
+    background-color: rgba(107, 114, 128, 0.1);
+    color: var(--text-secondary);
+}
+
+.game-card-info {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.game-card-info-item {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.game-card-info-item:last-child {
+    margin-bottom: 0;
+}
+
+.game-card-info-label {
+    font-weight: 500;
+    color: var(--text-primary);
+    min-width: 80px;
+}
+
+.game-card-users {
+    margin-bottom: 1rem;
+}
+
+.game-card-users-label {
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.game-users-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.user-badge {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.85rem;
+}
+
+.game-card-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.game-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.375rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.btn-join {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-join:hover:not(:disabled) {
+    background-color: #059669;
+}
+
+.btn-leave {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-leave:hover:not(:disabled) {
+    background-color: #dc2626;
+}
+
+.btn-start {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-start:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+}
+
+.btn-watch {
+    background-color: var(--warning-color);
+    color: white;
+}
+
+.btn-watch:hover:not(:disabled) {
+    background-color: #d97706;
+}
+
+.btn-history {
+    background-color: var(--text-secondary);
+    color: white;
+}
+
+.btn-history:hover:not(:disabled) {
+    background-color: #6b7280;
+}
+
+.game-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--text-secondary);
+}
+
+.empty-state-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-state-text {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Create Game Button */
+.create-game-section {
+    margin-bottom: 2rem;
+}
+
+.btn-create-game {
+    background-color: var(--success-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.btn-create-game:hover {
+    background-color: #059669;
+}
+
+/* Modal for creating game */
+.modal-create-game .modal-body {
+    padding: 1.5rem;
+}
+
+.form-group-modal {
+    margin-bottom: 1.5rem;
+}
+
+.form-group-modal:last-child {
+    margin-bottom: 0;
+}
+
+.form-group-modal label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.form-group-modal select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+    font-family: inherit;
+}
+
+.form-group-modal select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .game-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-container {
+        padding: 1rem 0.5rem;
+    }
+
+    .game-layout {
+        gap: 1rem;
+    }
+
+    .game-card {
+        padding: 1rem;
+    }
+
+    .game-card-actions {
+        flex-direction: column;
+    }
+
+    .game-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .games-tabs {
+        overflow-x: auto;
+    }
+
+    .games-tab {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+    }
+}

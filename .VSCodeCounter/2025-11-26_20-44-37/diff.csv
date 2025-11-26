@@ -1,0 +1,14 @@
+"filename", "language", "Python", "Markdown", "PostCSS", "HTML", "JavaScript", "Log", "comment", "blank", "total"
+"/home/shicj/wm/GAME_IMPLEMENTATION.md", "Markdown", 0, 417, 0, 0, 0, 0, 0, 115, 532
+"/home/shicj/wm/GAME_QUICKSTART.md", "Markdown", 0, 194, 0, 0, 0, 0, 0, 46, 240
+"/home/shicj/wm/GAME_REPORT.md", "Markdown", 0, 287, 0, 0, 0, 0, 0, 85, 372
+"/home/shicj/wm/app.py", "Python", 439, 0, 0, 0, 0, 0, 60, 102, 601
+"/home/shicj/wm/server.log", "Log", 0, 0, 0, 0, 0, 10, 0, 1, 11
+"/home/shicj/wm/static/css/game.css", "PostCSS", 0, 0, 322, 0, 0, 0, 8, 66, 396
+"/home/shicj/wm/static/js/game-detail.js", "JavaScript", 0, 0, 0, 0, 141, 0, 8, 24, 173
+"/home/shicj/wm/static/js/game-playing.js", "JavaScript", 0, 0, 0, 0, 270, 0, 23, 46, 339
+"/home/shicj/wm/static/js/game.js", "JavaScript", 0, 0, 0, 0, 335, 0, 13, 47, 395
+"/home/shicj/wm/templates/game_detail.html", "HTML", 0, 0, 0, 62, 0, 0, 3, 7, 72
+"/home/shicj/wm/templates/game_playing.html", "HTML", 0, 0, 0, 242, 0, 0, 3, 39, 284
+"/home/shicj/wm/templates/home.html", "HTML", 0, 0, 0, 8, 0, 0, 2, 4, 14
+"Total", "-", 439, 898, 322, 312, 746, 10, 120, 582, 3429

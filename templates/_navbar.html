@@ -9,7 +9,7 @@
             <a href="/changepw/" class="nav-link">更新信息</a>
             <a href="/admin/" class="nav-link">管理</a>
             {% if is_authenticated %}
-                <button id="logoutBtn" class="btn-danger">登出</button>
+                <button id="logoutBtn" onclick="logout()" class="btn-danger">登出</button>
             {% else %}
                 <a href="/login/" class="nav-link">登录</a>
             {% endif %}
