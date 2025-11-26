@@ -1,0 +1,78 @@
+@import 'color.css';
+
+.home-container {
+    min-height: 100vh;
+    background-color: var(--background-color);
+}
+
+.navbar {
+    background-color: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.navbar-brand h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.navbar-menu {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.btn {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.btn:hover {
+    color: var(--primary-hover);
+}
+
+.main-content {
+    padding: 2rem 1rem;
+}
+
+.welcome-box {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-light);
+}
+
+.welcome-box h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.welcome-box p {
+    margin-bottom: 0.75rem;
+}
+
+@media (max-width: 768px) {
+    .navbar .container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .navbar-menu {
+        width: 100%;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ user.username }} 的主页 - WordMachine</title>
+    <link rel="stylesheet" href="/static/css/basic.css">
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body>
+    <div class="container" style="max-width: 900px; margin: 2rem auto;">
+        {% include '_navbar.html' %}
+
+        <section class="card" style="padding: 1.5rem;">
+            <h2>{{ user.username }} <small style="color:#666; font-size:0.9rem;">#{{ user.id }}</small></h2>
+            <p><strong>评分：</strong> {{ user.rating }}</p>
+            <p><strong>类型：</strong> {{ user.type }}</p>
+            <div style="margin-top: 1rem;">
+                <h4>个人简介</h4>
+                <p>{{ user.introduction | e if user.introduction else '该用户还没有个人简介。' }}</p>
+            </div>
+        </section>
+
+        <footer style="margin-top: 2rem; color:#888; text-align:center;">&copy; WordMachine</footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<nav class="navbar">
+    <div class="container">
+        <div class="navbar-brand">
+            <h1><a href="/" style="color:inherit; text-decoration:none;">WordMachine</a></h1>
+        </div>
+        <div class="navbar-menu">
+            <a href="/" class="nav-link">主页</a>
+            <a href="/leaderboard/" class="nav-link">排行榜</a>
+            <a href="/changepw/" class="nav-link">更新信息</a>
+            <a href="/admin/" class="nav-link">管理</a>
+            {% if is_authenticated %}
+                <button id="logoutBtn" class="btn-danger">登出</button>
+            {% else %}
+                <a href="/login/" class="nav-link">登录</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>

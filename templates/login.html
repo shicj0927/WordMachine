@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - WordMachine</title>
+    <link rel="stylesheet" href="/static/css/color.css">
+    <link rel="stylesheet" href="/static/css/basic.css">
+    <link rel="stylesheet" href="/static/css/login.css">
+</head>
+<body>
+        {% include '_navbar.html' %}
+        <!-- <div class="login-container"> -->
+            <div class="container" style="max-width:480px; margin:2rem auto;">
+                <!-- <div class="card login-box"> -->
+            <h1 class="text-center">WordMachine</h1>
+            <!-- <p class="text-center subtitle">简介……</p> -->
+            
+            <div id="alert" class="hidden"></div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        placeholder="输入用户名"
+                        autocomplete="username"
+                        required
+                    >
+                    <div id="usernameError" class="error hidden"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="输入密码"
+                        autocomplete="current-password"
+                        required
+                    >
+                    <div id="passwordError" class="error hidden"></div>
+                </div>
+                
+                <button type="submit" id="loginBtn" class="btn-primary full-width">登录</button>
+            </form>
+            
+            <div class="text-center mt-3">
+                <p>还没有账号? <a href="/register/">立即注册</a></p>
+            </div>
+        <!-- </div> -->
+            </div>
+        <!-- </div> -->
+    
+    <script src="/static/js/basic.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/login.js"></script>
+</body>
+</html>

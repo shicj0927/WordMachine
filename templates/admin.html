@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理 - WordMachine</title>
+    <link rel="stylesheet" href="/static/css/color.css">
+    <link rel="stylesheet" href="/static/css/basic.css">
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        {% include '_navbar.html' %}
+        
+        <main class="main-content">
+            <div class="container">
+                <div id="alert" class="hidden"></div>
+                
+                <!-- Users Management Section -->
+                <div id="userManagementSection" class="admin-section">
+                    <div class="section-header">
+                        <h2>用户管理</h2>
+                        <div class="filter-controls">
+                            <label>
+                                <input type="checkbox" id="showDeletedCheckbox">
+                                显示已删除用户
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="usersTableContainer" class="table-container" style="max-height: 50vh;">
+                        <table class="users-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>用户名</th>
+                                    <th>简介</th>
+                                    <th>评分</th>
+                                    <th>类型</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                {% if users is not none %}
+                                    {% if users|length == 0 %}
+                                        <tr>
+                                            <td colspan="7" class="text-center" style="padding: 2rem;">没有用户信息</td>
+                                        </tr>
+                                    {% else %}
+                                        {% for user in users %}
+                                            <tr>
+                                                <td>{{ user.id }}</td>
+                                                <td><a href="/user/{{ user.id }}/">{{ user.username | e }}</a></td>
+                                                <td>{{ user.introduction | e if user.introduction else '-' }}</td>
+                                                <td>{{ user.rating }}</td>
+                                                <td>
+                                                    <span class="type-{{ user.type }}">{{ 'root' if user.type == 'root' else 'normal' }}</span>
+                                                </td>
+                                                <td>
+                                                    <span class="status-{{ 'deleted' if user.deleted else 'active' }}">{{ '已删除' if user.deleted else '正常' }}</span>
+                                                </td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        {% if not user.deleted %}
+                                                            <button class="action-btn action-btn-reset" data-uid="{{ user.id }}" data-username="{{ user.username | e }}">重置密码</button>
+                                                            {% if user.id != request.cookies.get('uid')|int %}
+                                                                <button class="action-btn action-btn-delete" data-uid="{{ user.id }}" data-username="{{ user.username | e }}">删除</button>
+                                                            {% endif %}
+                                                        {% else %}
+                                                            <button class="action-btn action-btn-restore" data-uid="{{ user.id }}" data-username="{{ user.username | e }}">恢复</button>
+                                                        {% endif %}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% else %}
+                                    <tr class="loading-row">
+                                        <td colspan="7" class="text-center">
+                                            <div class="loading"></div>
+                                            加载中...
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Dictionary Management Section -->
+                <div class="admin-section">
+                    <div class="section-header">
+                        <h2>词典管理</h2>
+                        <button id="createDictBtn" class="btn-primary">新建词典</button>
+                    </div>
+                    
+                    <div id="dictListContainer" class="dict-list-container">
+                        <div class="loading-container">
+                            <div class="loading"></div>
+                            加载中...
+                        </div>
+                    </div>
+                    
+                    <!-- Dictionary Edit Section -->
+                    <div id="dictEditSection" class="hidden" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #eee;">
+                        <div class="section-header">
+                            <h3 id="editDictTitle">编辑词典</h3>
+                            <button id="closeDictEditBtn" class="btn">关闭</button>
+                        </div>
+                        
+                        <div class="dict-edit-container" style="display: grid; gap: 1.5rem;">
+                            <!-- Dictionary Info Form -->
+                            <div class="form-area">
+                                <div class="form-group">
+                                    <label for="dictName">词典名称</label>
+                                    <input type="text" id="dictName" placeholder="输入词典名称">
+                                    <div id="dictNameError" class="error hidden"></div>
+                                </div>
+                                <button id="saveDictBtn" class="btn-primary">保存词典</button>
+                            </div>
+                            
+                            <!-- CSV Section -->
+                            <div class="csv-area">
+                                <h4>导入/导出</h4>
+                                <div class="csv-controls" style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                                    <button id="downloadCsvBtn" class="btn-info" style="flex: 1;">下载CSV</button>
+                                    <input type="file" id="csvFileInput" accept=".csv" hidden>
+                                    <button id="uploadCsvBtn" class="btn-info" style="flex: 1;">导入CSV</button>
+                                </div>
+                                <textarea id="csvTextarea" placeholder="或者在此粘贴CSV内容 (格式: english,chinese&#10;每行一个单词)" rows="5" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; font-family: monospace; margin-bottom: 0.5rem;"></textarea>
+                                <button id="importCsvTextBtn" class="btn-info" style="width: 100%;">导入</button>
+                            </div>
+                            
+                            <!-- Words Section -->
+                            <div class="words-area">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <h4 style="margin: 0;">单词列表</h4>
+                                    <button id="addWordBtn" class="btn-primary">新增单词</button>
+                                </div>
+                                
+                                <div id="wordsTableContainer" class="table-container" style="max-height: 50vh;">
+                                    <table class="users-table">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>序号</th>
+                                                <th>English</th>
+                                                <th>中文</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="wordsTableBody">
+                                            <tr class="loading-row">
+                                                <td colspan="5" class="text-center">加载中...</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Reset Password Modal -->
+    <div id="resetPasswordModal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeResetPasswordModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>重置密码</h3>
+                <button class="modal-close" onclick="closeResetPasswordModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="resetPasswordAlert" class="hidden"></div>
+                <form id="resetPasswordForm">
+                    <div class="form-group">
+                        <label for="resetUserId">用户ID</label>
+                        <input type="text" id="resetUserId" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="resetUsername">用户名</label>
+                        <input type="text" id="resetUsername" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">新密码</label>
+                        <input 
+                            type="password" 
+                            id="newPassword" 
+                            placeholder="输入新密码（至少6字符）"
+                            required
+                        >
+                        <div id="newPasswordError" class="error hidden"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmNewPassword">确认密码</label>
+                        <input 
+                            type="password" 
+                            id="confirmNewPassword" 
+                            placeholder="确认新密码"
+                            required
+                        >
+                        <div id="confirmNewPasswordError" class="error hidden"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" onclick="closeResetPasswordModal()">取消</button>
+                        <button type="submit" class="btn-primary">重置密码</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Confirm Action Modal -->
+    <div id="confirmModal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeConfirmModal()"></div>
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h3 id="confirmTitle">确认操作</h3>
+                <button class="modal-close" onclick="closeConfirmModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">确定要执行此操作吗？</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn" onclick="closeConfirmModal()">取消</button>
+                    <button type="button" id="confirmBtn" class="btn-danger">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Create/Edit Word Modal -->
+    <div id="wordModal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeWordModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="wordModalTitle">新增单词</h3>
+                <button class="modal-close" onclick="closeWordModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="wordModalError" class="error hidden"></div>
+                <div class="form-group">
+                    <label for="wordEnglish">English</label>
+                    <input type="text" id="wordEnglish" placeholder="输入英文单词">
+                    <div id="wordEnglishError" class="error hidden"></div>
+                </div>
+                <div class="form-group">
+                    <label for="wordChinese">中文</label>
+                    <input type="text" id="wordChinese" placeholder="输入中文翻译">
+                    <div id="wordChineseError" class="error hidden"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" onclick="closeWordModal()">取消</button>
+                    <button type="button" id="saveWordBtn" class="btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Confirm Delete Modal -->
+    <div id="confirmDeleteModal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeConfirmDeleteModal()"></div>
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h3>确认删除</h3>
+                <button class="modal-close" onclick="closeConfirmDeleteModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmDeleteMessage">确定要删除吗？</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn" onclick="closeConfirmDeleteModal()">取消</button>
+                    <button type="button" id="confirmDeleteBtn" class="btn-danger">删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/static/js/basic.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/admin.js"></script>
+</body>
+</html>

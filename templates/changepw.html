@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>更新信息 - WordMachine</title>
+    <link rel="stylesheet" href="/static/css/color.css">
+    <link rel="stylesheet" href="/static/css/basic.css">
+    <link rel="stylesheet" href="/static/css/changepw.css">
+</head>
+<body>
+        {% include '_navbar.html' %}
+        <!-- <div class="changepw-container"> -->
+            <div class="container" style="max-width:700px; margin:2rem auto;">
+                <!-- <div class="card changepw-box"> -->
+            <h2 class="text-center">更新信息</h2>
+            
+            <div id="alert" class="hidden"></div>
+            
+            <form id="changepwForm">
+                <div class="form-group">
+                    <label for="currentPassword">当前密码</label>
+                    <input 
+                        type="password" 
+                        id="currentPassword" 
+                        name="currentPassword" 
+                        placeholder="输入当前密码（更新简介无需）"
+                        autocomplete="current-password"
+                        required
+                    >
+                    <div id="currentPasswordError" class="error hidden"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="newPassword">新密码</label>
+                    <input 
+                        type="password" 
+                        id="newPassword" 
+                        name="newPassword" 
+                        placeholder="输入新密码（至少6字符）（更新简介无需）"
+                        autocomplete="new-password"
+                        required
+                    >
+                    <div id="newPasswordError" class="error hidden"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">确认新密码</label>
+                    <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        name="confirmPassword" 
+                        placeholder="再次输入新密码（更新简介无需）"
+                        autocomplete="new-password"
+                        required
+                    >
+                    <div id="confirmPasswordError" class="error hidden"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="introduction">个人简介</label>
+                    <textarea 
+                        id="introduction" 
+                        name="introduction" 
+                        placeholder="修改个人简介"
+                    ></textarea>
+                    <div id="introductionError" class="error hidden"></div>
+                </div>
+                
+                <button id="updateBtn" class="btn-primary full-width">更新信息</button>
+            </form>
+            
+            <!-- <div class="text-center mt-3"> -->
+                <!-- <a href="/" class="nav-link">返回主页</a> -->
+            <!-- </div> -->
+        <!-- </div> -->
+            </div>
+        <!-- </div> -->
+    
+    <script src="/static/js/basic.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/changepw.js"></script>
+</body>
+</html>

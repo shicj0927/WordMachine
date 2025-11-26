@@ -1,0 +1,44 @@
+@import 'color.css';
+
+.register-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1e3a8a 100%);
+    padding: 1rem;
+}
+
+.register-box {
+    width: 100%;
+    max-width: 450px;
+    background-color: var(--surface-color);
+    box-shadow: var(--shadow-heavy);
+}
+
+.register-box h1 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.register-box .subtitle {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.register-box form {
+    margin-bottom: 1.5rem;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.register-box a {
+    color: var(--primary-color);
+}
+
+.register-box a:hover {
+    color: var(--primary-hover);
+}

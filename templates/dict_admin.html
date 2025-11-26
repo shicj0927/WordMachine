@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>词典管理 - WordMachine</title>
+    <link rel="stylesheet" href="/static/css/color.css">
+    <link rel="stylesheet" href="/static/css/basic.css">
+    <link rel="stylesheet" href="/static/css/dict.css">
+</head>
+<body>
+    <div class="dict-admin-container">
+        {% include '_navbar.html' %}
+        
+        <main class="main-content">
+            <div class="container">
+                <div id="alert" class="hidden"></div>
+                
+                <!-- Dictionary List Section -->
+                <div class="dict-section">
+                    <div class="section-header">
+                        <h2>词典列表</h2>
+                        <button id="createDictBtn" class="btn-primary">新建词典</button>
+                    </div>
+                    
+                    <div id="dictListContainer" class="dict-list-container">
+                        <div class="loading-container">
+                            <div class="loading"></div>
+                            加载中...
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dictionary Edit Section -->
+                <div id="dictEditSection" class="dict-section hidden">
+                    <div class="section-header">
+                        <h2 id="editDictTitle">编辑词典</h2>
+                        <button id="closeDictEditBtn" class="btn">关闭</button>
+                    </div>
+                    
+                    <div class="dict-edit-container">
+                        <!-- Dictionary Info Form -->
+                        <div class="form-area">
+                            <div class="form-group">
+                                <label for="dictName">词典名称</label>
+                                <input type="text" id="dictName" placeholder="输入词典名称">
+                                <div id="dictNameError" class="error hidden"></div>
+                            </div>
+                            <button id="saveDictBtn" class="btn-primary">保存词典</button>
+                        </div>
+                        
+                        <!-- CSV Section -->
+                        <div class="csv-area">
+                            <h3>导入/导出</h3>
+                            <div class="csv-controls">
+                                <button id="downloadCsvBtn" class="btn-info">下载CSV</button>
+                                <input type="file" id="csvFileInput" accept=".csv" hidden>
+                                <button id="uploadCsvBtn" class="btn-info">导入CSV</button>
+                            </div>
+                            <textarea id="csvTextarea" placeholder="或者在此粘贴CSV内容 (格式: english,chinese&#10;每行一个单词)" rows="6"></textarea>
+                            <button id="importCsvTextBtn" class="btn-info">导入</button>
+                        </div>
+                        
+                        <!-- Words Section -->
+                        <div class="words-area">
+                            <div class="words-header">
+                                <h3>单词列表</h3>
+                                <button id="addWordBtn" class="btn-primary">新增单词</button>
+                            </div>
+                            
+                            <div id="wordsTableContainer" class="table-container" style="max-height: 50vh;">
+                                <table class="words-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>English</th>
+                                            <th>中文</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="wordsTableBody">
+                                        <tr class="loading-row">
+                                            <td colspan="4" class="text-center">加载中...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Create/Edit Word Modal -->
+    <div id="wordModal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeWordModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="wordModalTitle">新增单词</h3>
+                <button class="modal-close" onclick="closeWordModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="wordModalError" class="error hidden"></div>
+                <div class="form-group">
+                    <label for="wordEnglish">English</label>
+                    <input type="text" id="wordEnglish" placeholder="输入英文单词">
+                    <div id="wordEnglishError" class="error hidden"></div>
+                </div>
+                <div class="form-group">
+                    <label for="wordChinese">中文</label>
+                    <input type="text" id="wordChinese" placeholder="输入中文翻译">
+                    <div id="wordChineseError" class="error hidden"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" onclick="closeWordModal()">取消</button>
+                    <button type="button" id="saveWordBtn" class="btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Confirm Delete Modal -->
+    <div id="confirmDeleteModal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeConfirmDeleteModal()"></div>
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h3>确认删除</h3>
+                <button class="modal-close" onclick="closeConfirmDeleteModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmDeleteMessage">确定要删除吗？</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn" onclick="closeConfirmDeleteModal()">取消</button>
+                    <button type="button" id="confirmDeleteBtn" class="btn-danger">删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/static/js/basic.js"></script>
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/dict.js"></script>
+</body>
+</html>

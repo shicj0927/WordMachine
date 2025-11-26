@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>排行榜 - WordMachine</title>
+    <link rel="stylesheet" href="/static/css/basic.css">
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body>
+    {% include '_navbar.html' %}
+    <div class="container" style="max-width: 1000px; margin: 2rem auto;">
+
+        <section class="card" style="padding: 1.5rem;">
+            <h2>排行榜</h2>
+            <div class="table-container" style="margin-top:1rem;">
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>ID</th>
+                            <th>用户名</th>
+                            <th>简介</th>
+                            <th>评分</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if users and users|length > 0 %}
+                            {% for user in users %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ user.id }}</td>
+                                    <td><a href="/user/{{ user.id }}/">{{ user.username | e }}</a></td>
+                                    <td>{{ user.introduction | e if user.introduction else '-' }}</td>
+                                    <td>{{ user.rating }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center">暂无用户</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer style="margin-top: 2rem; color:#888; text-align:center;">&copy; WordMachine</footer>
+    </div>
+</body>
+</html>
