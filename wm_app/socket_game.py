@@ -1,5 +1,5 @@
 from . import socketio
-from flask_socketio import join_room, leave_room, emit
+from flask_socketio import join_room, leave_room, emit, check_answer
 from .utils import get_db_connection, check_auth
 import json
 
@@ -336,7 +336,7 @@ def handle_answer(data):
         emit('game.error', {'message': 'Word not found'})
         return
 
-    is_correct = answer.strip().lower() == word['english'].strip().lower()
+    is_correct = is_correct = check_answer(answer.strip(), word['english'].strip())
 
     result.append({
         'uid': uid,

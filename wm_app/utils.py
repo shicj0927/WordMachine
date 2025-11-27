@@ -61,3 +61,10 @@ def inject_auth_context():
     except Exception as e:
         print(f"inject_auth_context error: {e}")
         return {'is_authenticated': False, 'current_user': None}
+
+
+def check_answer(ipt, ans):
+    # 多个可任选的查验
+    ipt=ipt.strip().lower()
+    ans=ans.strip().lower()
+    return ipt in ans.split('/')

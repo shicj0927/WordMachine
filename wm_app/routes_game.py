@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from .utils import get_db_connection, check_auth
+from .utils import get_db_connection, check_auth, check_answer
 import json
 import random
 
@@ -411,7 +411,7 @@ def api_game_answer(game_id):
             conn.close()
             return jsonify({'success': False, 'message': 'Word not found'}), 404
 
-        is_correct = answer.strip().lower() == word['english'].strip().lower()
+        is_correct = check_answer(answer.strip(), word['english'].strip())
 
         result.append({
             'uid': uid,
