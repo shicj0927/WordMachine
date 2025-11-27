@@ -44,14 +44,14 @@
 	- 500：系统错误
 - 返回2：`{'success': True}`（200）
 
-## 4. /api/user/<int: uid>
+## 4. /api/user/uid(int)
 - 类型：GET
 - 参数：无
 - 返回1：`{'success': True, 'user': user}`（200）
 - 返回2：`{'success':  False, 'message':  'User not found'}`（404）
 - 返回3：`{'success': False, 'message': 'Server error'}`（500）
 
-## 5. /api/user/<int:uid>/update
+## 5. /api/user/uid(int)/update
 - 类型：POST（json）
 - 参数：
 	- `current_password`：字符串，原始密码
