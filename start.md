@@ -37,6 +37,12 @@ use wm;
 ```
 
 ```sql
+
+drop table user;
+drop table dict;
+drop table word;
+drop table game;
+
 create table user(
     id int primary key auto_increment,
     username varchar(255),
