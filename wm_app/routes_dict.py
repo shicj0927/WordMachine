@@ -240,6 +240,12 @@ def api_update_word(word_id):
         print(f"Update word error: {e}")
         return jsonify({'success': False}), 500
 
+def erase_marks(s):
+    if s[0]=='"':
+        s=s[1:]
+    if s[len(s)-1]=='"':
+        s=s[:-1]
+    return s
 
 @bp.route('/api/word/<int:word_id>', methods=['DELETE'])
 def api_delete_word(word_id):
@@ -303,7 +309,7 @@ def api_import_csv(dict_id):
                 continue
             parts = line.split(',', 1)
             if len(parts) == 2:
-                english, chinese = parts[0].strip(), parts[1].strip()
+                english, chinese = erase_marks(parts[0].strip()), erase_marks(parts[1].strip())
                 if english and chinese:
                     cursor.execute(
                         "INSERT INTO word (dictid, english, chinese, deleted) VALUES (%s, %s, %s, 0)",
