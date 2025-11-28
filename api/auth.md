@@ -6,7 +6,6 @@
 	- `username`：字符串，用户名
 	- `password`：字符串，密码
 	- `introduction`：字符串，用户简介
-- Cookies：无
 - 返回1：`{'success': False, 'message': xxx}`
 - 信息（状态码）：
 	- `Username and password required`（400）
@@ -22,7 +21,6 @@
 - 参数：
 	- `username`：字符串，用户名
 	- `password`：字符串，密码
-- Cookies：无
 - 返回1：`{'success': False, 'message': xxx}`
 - 信息（状态码）：
 	- `Username and password required`（400）
