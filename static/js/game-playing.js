@@ -56,7 +56,7 @@ async function loadGameAndStart() {
 function initializeScores() {
     const users = currentGameData.users || [];
     users.forEach(user => {
-        userScores[user.id] = { correct: 0, wrong: 0, perf: 0 };
+        userScores[user.id] = { correct: 0, wrong: 0, perf: 0};
     });
 
     // Count existing results
@@ -65,10 +65,10 @@ function initializeScores() {
         if (userScores[result.uid]) {
             if (result.result) {
                 userScores[result.uid].correct++;
-                userScores[result.uid].perf++;
+                userScores[result.uid].perf=result.perf;
             } else {
                 userScores[result.uid].wrong++;
-                userScores[result.uid].perf--;
+                userScores[result.uid].perf=result.perf;
             }
         }
     });
@@ -163,11 +163,22 @@ async function submitAnswer(event) {
                 uid: AUTH_DATA.uid,
                 pwhash: AUTH_DATA.pwhash,
                 word_id: expectedWordId,
-                answer: answer
+                answer: answer,
+                rating: rating
             })
         });
 
         const data = await response.json();
+        
+        // Update scores
+        if (data.correct) {
+            userScores[AUTH_DATA.uid].correct++;
+            userScores[AUTH_DATA.uid].perf=data.perf;
+        } else {
+            userScores[AUTH_DATA.uid].wrong++;
+            userScores[AUTH_DATA.uid].perf=data.perf;
+        }
+
         if (data.success) {
             // Record the answer
             userAnswers.push({
@@ -175,15 +186,6 @@ async function submitAnswer(event) {
                 answer: answer,
                 correct: data.correct
             });
-
-            // Update scores
-            if (data.correct) {
-                userScores[AUTH_DATA.uid].correct++;
-                userScores[AUTH_DATA.uid].perf++;
-            } else {
-                userScores[AUTH_DATA.uid].wrong++;
-                userScores[AUTH_DATA.uid].perf--;
-            }
 
             updateMyScore();
 
@@ -252,10 +254,10 @@ function initSocket() {
 }
 
 function updateMyScore() {
-    const myScore = userScores[AUTH_DATA.uid] || { correct: 0, wrong: 0, perf: 0 };
+    const myScore = userScores[AUTH_DATA.uid] || { correct: 0, wrong: 0, perf: 0};
     document.getElementById('myCorrect').textContent = myScore.correct;
     document.getElementById('myWrong').textContent = myScore.wrong;
-    document.getElementById('myPerf').textContent = myScore.perf > 0 ? '+' + myScore.perf : myScore.perf;
+    document.getElementById('myPerf').textContent = myScore.perf;
 }
 
 function updateResultsDisplay() {
@@ -298,7 +300,7 @@ function updateParticipantsList() {
     const users = currentGameData.users || [];
 
     const html = users.map(user => {
-        const score = userScores[user.id] || { correct: 0, wrong: 0, perf: 0 };
+        const score = userScores[user.id] || { correct: 0, wrong: 0, perf: 0};
         const isCurrent = user.id === AUTH_DATA.uid ? ' (你)' : '';
         return `
             <li>

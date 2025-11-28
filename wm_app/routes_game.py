@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from .utils import get_db_connection, check_auth
 import json
 import random
+import numpy
 
 bp = Blueprint('game', __name__)
 
@@ -137,11 +138,21 @@ def api_game_get(game_id):
         game['result'] = json.loads(game['result']) if game['result'] else []
 
         users_info = []
+        userratinghistory_info = []
         for user_id in game['users']:
             cursor.execute("SELECT id, username FROM user WHERE id = %s", (user_id,))
             user = cursor.fetchone()
             if user:
                 users_info.append(user)
+        
+        for user_id in game['users']:
+            cursor.execute("SELECT ratinghistory FROM user WHERE id = %s", (user_id,))
+            userrating = cursor.fetchone()
+            if userrating and userrating['ratinghistory']:
+                history_list = json.loads(userrating['ratinghistory'])
+            else:
+                history_list = []
+            userratinghistory_info.append({'user_id': user_id, 'ratinghistory': history_list})
 
         owner_info = None
         if game.get('ownerid'):
@@ -165,10 +176,10 @@ def api_game_get(game_id):
             if uid_result in perf_map:
                 if is_correct:
                     perf_map[uid_result]['correct'] += 1
-                    perf_map[uid_result]['perf'] += 1
+                    perf_map[uid_result]['perf'] = result.get('perf')
                 else:
                     perf_map[uid_result]['wrong'] += 1
-                    perf_map[uid_result]['perf'] -= 1
+                    perf_map[uid_result]['perf'] = result.get('perf')
 
         cursor.close()
         conn.close()
@@ -202,6 +213,7 @@ def api_game_get(game_id):
                 'dictid': game['dictid'],
                 'dictname': game['dictname'],
                 'users': users_info,
+                'userrating': userratinghistory_info,
                 'words': words_info,
                 'result': game['result'],
                 'perf': perf_map,
@@ -433,6 +445,11 @@ def api_game_answer(game_id):
             if nw:
                 next_word = {'id': nw['id'], 'english': nw['english'], 'chinese': nw['chinese']}
 
+        cursor.execute("SELECT rating FROM user WHERE id = %s", (uid,))
+        user = cursor.fetchone()
+        rating = user['rating'] if user else 0
+
+
         cursor.close()
         conn.close()
 
@@ -442,7 +459,8 @@ def api_game_answer(game_id):
             'expected': word['english'],
             'next_turn': next_turn,
             'next_word': next_word,
-            'message': 'Answer recorded'
+            'message': 'Answer recorded',
+            'rating': rating
         }), 200
     except Exception as e:
         print(f"Game answer error: {e}")
@@ -485,19 +503,30 @@ def api_game_end(game_id):
 
         for result_item in result:
             uid_result = result_item.get('uid')
-            is_correct = result_item.get('result', False)
             if uid_result in perf_map:
-                if is_correct:
-                    perf_map[uid_result] += 1
-                else:
-                    perf_map[uid_result] -= 1
+                perf_map[uid_result] = result_item.get('perf')
 
         for user_id, perf in perf_map.items():
             cursor.execute("SELECT rating FROM user WHERE id = %s", (user_id,))
             user = cursor.fetchone()
             if user:
-                new_rating = user['rating'] + perf
-                cursor.execute("UPDATE user SET rating = %s WHERE id = %s", (new_rating, user_id))
+                # print("user_id:", user_id, "rating before:", user['rating'], "perf:", perf)
+                if numpy.sign(perf - user['rating']) == 1:
+                    rating_base = (1500.0/min(max(user['rating'],1300),1700))
+                else:
+                    rating_base = 1.0/(1500.0/max(min(user['rating'],2500),1000))
+                rating_delta = rating_base * numpy.sign(perf - user['rating']) * (abs(perf - user['rating'])**0.95)
+                rating_delta = round(rating_delta)
+                # print("rating delta:", rating_delta)
+                cursor.execute("SELECT ratinghistory FROM user WHERE id = %s", (user_id,))
+                ratinghistory = cursor.fetchone()
+                if ratinghistory and ratinghistory['ratinghistory']:
+                    history_list = json.loads(ratinghistory['ratinghistory'])
+                else:
+                    history_list = []
+                history_list.append({'game_id': game_id, 'delta': rating_delta, 'new_rating': user['rating'] + rating_delta})
+                cursor.execute("UPDATE user SET rating = %s WHERE id = %s", (user['rating']+rating_delta, user_id))
+                cursor.execute("UPDATE user SET ratinghistory = %s WHERE id = %s", (json.dumps(history_list), user_id))
 
         cursor.execute("UPDATE game SET status = %s WHERE id = %s", (1, game_id))
 

@@ -94,6 +94,7 @@ function renderGameSummary(game) {
 function renderPerfSummary(game) {
     const container = document.getElementById('perfSummary');
     const perfData = game.perf || {};
+    const ratingChanges = game.userrating || {};
 
     const perfRows = Object.entries(perfData).map(([userId, perf]) => {
         const user = game.users.find(u => u.id == userId);
@@ -119,7 +120,7 @@ function renderPerfSummary(game) {
                         <th>用户</th>
                         <th style="text-align: center;">正确</th>
                         <th style="text-align: center;">错误</th>
-                        <th style="text-align: center;">Perf变更</th>
+                        <th style="text-align: center;">Perf</th>
                     </tr>
                 </thead>
                 <tbody>
