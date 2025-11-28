@@ -50,7 +50,9 @@ create table user(
     introduction varchar(255),
     rating int,
     type varchar(255),
-    deleted boolean
+    deleted boolean,
+    gamehistory text,
+    ratinghistory text
 );
 
 create table dict(
@@ -74,7 +76,8 @@ create table game(
     users text,
     wordlist text,
     result text,
-    perf int,
+    perf text,
+    ratingdelta text,
     status int
 );
 ```
